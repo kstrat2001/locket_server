@@ -6,7 +6,7 @@ gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 4.0.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -51,5 +51,12 @@ group :development, :test do
   gem "factory_girl_rails"
   gem 'ffaker'
   gem 'shoulda-matchers'
+
+  # gems for sabisu - rest api tester
+  gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
+  gem 'compass-rails', '~> 2.0.0'
+  gem 'furatto', '~> 1.3.7'
+  gem 'font-awesome-rails', '~> 4.3.0.0'
+  gem 'simple_form', '~> 3.1.0'
 end
 
