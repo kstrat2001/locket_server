@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails locket_server: development" uuid="3fde7fdf-8f67-43a2-a2ac-62848b88a84f">
+      <auth-required>false</auth-required>
+    </data-source>
+    <data-source name="Rails locket_server: test" uuid="33e7ac25-1a3e-481d-b952-54ab58670d56">
+      <auth-required>false</auth-required>
+    </data-source>
+  </component>
+</project>
