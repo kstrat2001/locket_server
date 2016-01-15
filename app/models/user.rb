@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  has_many :image_assets, dependent: :destroy
   validates :auth_token, uniqueness: true
 
   # Include default devise modules. Others available are:

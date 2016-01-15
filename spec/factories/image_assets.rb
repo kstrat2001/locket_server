@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :image_asset do
-    title "MyString"
-anchor_x 1
-anchor_y 1
-user nil
+    title { FFaker::Name.name }
+    anchor_x { 3 }
+    anchor_y { 4 }
+    user
   end
 
 end

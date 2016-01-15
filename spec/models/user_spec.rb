@@ -11,6 +11,7 @@ describe User do
   it { should respond_to(:auth_token) }
 
   it { should be_valid }
+  it { should have_many(:image_assets) }
 
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email).case_insensitive }
@@ -29,6 +30,22 @@ describe User do
       existing_user = FactoryGirl.create(:user, auth_token: "auniquetoken123")
       @user.generate_authentication_token!
       expect(@user.auth_token).not_to eql existing_user.auth_token
+    end
+  end
+
+  describe "#image_assets association" do
+
+    before do
+      @user.save
+      3.times { FactoryGirl.create :image_asset, user: @user }
+    end
+
+    it "destroys the associated image assets on self destruct" do
+      image_assets = @user.image_assets
+      @user.destroy
+      image_assets.each do |asset|
+        expect(ImageAsset.find(asset)).to raise_error ActiveRecord::RecordNotFound
+      end
     end
   end
 
