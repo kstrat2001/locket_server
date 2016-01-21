@@ -8,7 +8,7 @@ describe Authenticable do
   let(:authentication) { Authentication.new }
   subject { authentication }
 
-  describe "#current_user" do
+  describe "#authorized_user" do
     before do
       @user = FactoryGirl.create :user
       api_authorization_header(@user.auth_token)
@@ -16,7 +16,7 @@ describe Authenticable do
     end
 
     it "returns the user from the authorization header" do
-      expect(authentication.current_user.auth_token).to eql @user.auth_token
+      expect(authentication.authorized_user.auth_token).to eql @user.auth_token
     end
 
   end
@@ -41,7 +41,7 @@ describe Authenticable do
     context "when there is a user on 'session'" do
       before do
         @user = FactoryGirl.create :user
-        authentication.stub(:current_user).and_return(@user)
+        authentication.stub(:authorized_user).and_return(@user)
       end
 
       it { should be_user_signed_in }
@@ -50,7 +50,7 @@ describe Authenticable do
     context "when there is no user on 'session'" do
       before do
         @user = FactoryGirl.create :user
-        authentication.stub(:current_user).and_return(nil)
+        authentication.stub(:authorized_user).and_return(nil)
       end
 
       it { should_not be_user_signed_in }

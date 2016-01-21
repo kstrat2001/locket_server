@@ -1,8 +1,8 @@
 module Authenticable
 
   # Devise methods overrides
-  def current_user
-    @current_user ||= User.find_by(auth_token: request.headers['Authorization'])
+  def authorized_user
+    @authorized_user ||= User.find_by(auth_token: request.headers['Authorization'])
   end
 
   def authenticate_with_token!
@@ -11,7 +11,7 @@ module Authenticable
   end
 
   def user_signed_in?
-    current_user.present?
+    authorized_user.present?
   end
 
 end

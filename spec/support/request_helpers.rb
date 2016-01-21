@@ -19,6 +19,10 @@ module Request
       request.headers['Authorization' ] = token
     end
 
+    def view_response_format(format = :html)
+      request.headers['Accept' ] = :html
+    end
+
     def include_default_accept_headers
       api_header
       api_response_format

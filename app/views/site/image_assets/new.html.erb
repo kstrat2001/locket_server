@@ -1,0 +1,39 @@
+<%= form_for :image_asset, url: site_user_image_assets_path(@user) do |f| %>
+
+  <% if @image_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@image_asset.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @image_asset.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<p>
+  <%= f.label :title %><br>
+  <%= f.text_field :title %>
+</p>
+
+<p>
+  <%= f.label :anchor_x %><br>
+  <%= f.number_field :anchor_x %>
+</p>
+
+<p>
+  <%= f.label :anchor_y %><br>
+  <%= f.number_field :anchor_y %>
+</p>
+
+<p>
+  <%= f.label :image %><br>
+  <%= f.file_field :image %>
+</p>
+
+<%= f.submit %>
+
+<% end %>

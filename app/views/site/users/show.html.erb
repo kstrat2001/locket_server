@@ -1,0 +1,16 @@
+<h1><%= "User profile: #{current_user.email}" %></h1>
+
+<p>
+  <h2>Image Assets</h2>
+  <table>
+  <% current_user.image_assets.each do |asset| %>
+    <tr>
+      <td><%= link_to asset.title, site_user_image_asset_path(current_user, asset.id) %></td>
+      <td><%= link_to 'delete', site_user_image_asset_path(current_user, asset), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br><br>
+  <%= link_to 'Create New Image Asset', new_site_user_image_asset_path(current_user) %>
+</p>

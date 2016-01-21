@@ -8,7 +8,7 @@ describe Api::V1::ImageAssetsController do
     end
 
     it "returns the information about a reporter on a hash" do
-      image_asset_response = json_response
+      image_asset_response = json_response[:image_asset]
       expect(image_asset_response[:title]).to eql @image_asset.title
     end
 
@@ -23,7 +23,7 @@ describe Api::V1::ImageAssetsController do
 
     it "returns 4 records from the database" do
       assets_response = json_response
-      expect(assets_response[:image_assets]).to have(4).items
+      expect(assets_response[:image_assets].size).to eq(4)
     end
 
     it { should respond_with 200 }
@@ -39,7 +39,7 @@ describe Api::V1::ImageAssetsController do
       end
 
       it "renders the json representation for the image_asset record just created" do
-        asset_response = json_response
+        asset_response = json_response[:image_asset]
         expect(asset_response[:title]).to eql @image_asset_attributes[:title]
       end
 
@@ -83,7 +83,7 @@ describe Api::V1::ImageAssetsController do
       end
 
       it "renders the json representation for the updated user" do
-        image_asset_response = json_response
+        image_asset_response = json_response[:image_asset]
         expect(image_asset_response[:title]).to eql "Red Heart"
       end
 

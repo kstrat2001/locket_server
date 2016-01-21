@@ -17,7 +17,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    user = current_user
+    user = authorized_user
+    user.skip_reconfirmation!
     if user.update(user_params)
       render json: user, status: 200, location: [:api, user]
     else
@@ -26,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    user = current_user
+    user = authorized_user
     user.destroy
     head 204
   end

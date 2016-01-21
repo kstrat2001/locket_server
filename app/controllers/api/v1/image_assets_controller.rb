@@ -10,7 +10,7 @@ class Api::V1::ImageAssetsController < ApplicationController
   end
 
   def create
-    image_asset = current_user.image_assets.build(image_asset_params)
+    image_asset = authorized_user.image_assets.build(image_asset_params)
     if image_asset.save
       render json: image_asset, status: 201, location: [:api, image_asset]
     else
@@ -19,7 +19,7 @@ class Api::V1::ImageAssetsController < ApplicationController
   end
 
   def update
-    image_asset = current_user.image_assets.find(params[:id])
+    image_asset = authorized_user.image_assets.find(params[:id])
     if image_asset.update(image_asset_params)
       render json: image_asset, status: 200, location: [:api, image_asset]
     else
@@ -28,11 +28,11 @@ class Api::V1::ImageAssetsController < ApplicationController
   end
 
   def image_asset_params
-    params.require(:image_asset).permit(:title, :anchor_x, :anchor_y)
+    params.require(:image_asset).permit(:title, :anchor_x, :anchor_y, :image)
   end
 
   def destroy
-    image_asset = current_user.image_assets.find(params[:id])
+    image_asset = authorized_user.image_assets.find(params[:id])
     image_asset.destroy 
     head 204 
   end
