@@ -6,15 +6,33 @@ class Site::ImageAssetsController < ApplicationController
   def new
     @user = current_user
     @image_asset = ImageAsset.new
+    @action = "create"
+  end
+
+  def edit
+    @user = current_user
+    @image_asset = current_user.image_assets.find(params[:id])
+    @action = "update"
   end
 
   def create
     @user = current_user
     @image_asset = current_user.image_assets.build(image_asset_params)
+    @action = "create"
+
     if @image_asset.save
       redirect_to site_user_image_asset_path(current_user, @image_asset)
     else
       render :new
+    end
+  end
+
+  def update
+    @image_asset = current_user.image_assets.find(params[:id])
+    if @image_asset.update(image_asset_params)
+      redirect_to site_user_image_asset_path(current_user, @image_asset)
+    else
+      render site_user_image_asset_path(current_user, @image_asset) 
     end
   end
 

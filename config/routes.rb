@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   namespace :site do
     resources :users, :only => [ :show ] do
-      resources :image_assets, :only => [ :show, :create, :new, :destroy ]
+      resources :image_assets, :only => [ :show, :create, :new, :edit, :update, :destroy ]
     end
   end
 

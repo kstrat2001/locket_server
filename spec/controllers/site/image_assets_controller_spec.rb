@@ -35,6 +35,23 @@ describe Site::ImageAssetsController do
     end
   end
 
+  describe "GET #edit" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      @image_asset = FactoryGirl.create :image_asset, user: @user
+      @user.confirm
+      sign_in(@user)
+
+      view_response_format
+
+      get :edit, { user_id: @user.id, id: @image_asset.id }
+    end
+
+    it "renders the edit form for an image asset record" do
+      response.should render_template('image_assets/edit')
+    end
+  end
+
   describe "POST #create" do
     context "when is successfully created" do
       before(:each) do
@@ -83,6 +100,27 @@ describe Site::ImageAssetsController do
 
     # redirect response
     it { should respond_with 302 }
+  end
+
+  describe "PUT/PATCH #update" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      @user.confirm
+      sign_in(@user)
+      @image_asset = FactoryGirl.create :image_asset, user: @user
+    end
+
+    context "when successfully updated" do
+        before(:each) do
+          patch :update, { user_id: @user.id, id: @image_asset.id, image_asset: { anchor_y: 20, anchor_x: 10 } }
+          @image_asset = ImageAsset.find(@image_asset.id)
+        end
+
+      it "sets the image asset fields as expected" do
+        expect(@image_asset.anchor_x).to eql 10
+        expect(@image_asset.anchor_y).to eql 20
+      end
+    end
   end
 
 end
