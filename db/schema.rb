@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116010038) do
+ActiveRecord::Schema.define(version: 20160122041103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,19 @@ ActiveRecord::Schema.define(version: 20160116010038) do
   end
 
   add_index "image_assets", ["user_id"], name: "index_image_assets_on_user_id", using: :btree
+
+  create_table "lockets", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "open_image_id"
+    t.integer  "closed_image_id"
+    t.integer  "chain_image_id"
+    t.integer  "mask_image_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+  end
+
+  add_index "lockets", ["user_id"], name: "index_lockets_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -57,4 +70,5 @@ ActiveRecord::Schema.define(version: 20160116010038) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "image_assets", "users"
+  add_foreign_key "lockets", "users"
 end
