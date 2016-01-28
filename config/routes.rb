@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  mount SabisuRails::Engine => "/sabisu_rails"
+  if Rails.env.development?
+    mount SabisuRails::Engine => "/sabisu_rails"
+  end
 
   devise_for :users
 
