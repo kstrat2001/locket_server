@@ -54,6 +54,9 @@ gem 'aws-sdk', '< 2.0'
 # environment variable management
 gem 'figaro'
 
+# simple forms (also needed for sabisu)
+gem 'simple_form', '~> 3.1.0'
+
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -75,7 +78,6 @@ group :development, :test do
   gem 'compass-rails', '~> 2.0.0'
   gem 'furatto', '~> 1.3.7'
   gem 'font-awesome-rails', '~> 4.3.0.0'
-  gem 'simple_form', '~> 3.1.0'
 end
 
 group :test do
