@@ -76,4 +76,37 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # mailer settings
+  config.action_mailer.raise_delivery_errors = true
+
+  # Configure mailer
+  config.action_mailer.default_url_options = { host: 'ilocket.herokuapp.com', port: 80 }
+
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.1and1.com',
+    port: 587,
+    domain: ENV['EMAIL_DOMAIN'],
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    user_name: ENV['EMAIL_USERNAME'],
+    password: ENV['EMAIL_PASSWORD']
+  }
+  
+  Paperclip.options[:command_path] = "/usr/local/bin"
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :url => ":s3_domain_url",
+    :path => ":class/:attachment/:id_partition/:style/:filename",
+    :s3_host_name => "s3.amazonaws.com",
+    :s3_credentials => {
+      :bucket => ENV['S3_BUCKET_NAME'],
+      :access_key_id => ENV['AWS_ACCESS_KEY'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
+
 end
