@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 # heroku requires standard output and static assets
 gem 'rails_12factor', group: :production
 
+# Use unicorn as the app server
+gem 'unicorn'
+gem 'foreman'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 
