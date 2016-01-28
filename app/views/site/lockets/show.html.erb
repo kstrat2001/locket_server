@@ -1,0 +1,16 @@
+<h1><%= "Locket: #{@locket.title}" %> </h1>
+
+<h2>Open Image</h2>
+<%= image_tag @locket.open_image.image.url(:thumb) %>
+
+<h2>Closed Image</h2>
+<%= image_tag @locket.closed_image.image.url(:thumb) %>
+
+<h2>Mask Image</h2>
+<%= image_tag @locket.mask_image.image.url(:thumb) %>
+
+<h2>Chain Image</h2>
+<%= image_tag @locket.chain_image.image.url(:thumb) %>
+
+<br>
+<%= link_to "Edit #{@locket.title}", edit_site_user_locket_path(current_user, @locket.id) %>

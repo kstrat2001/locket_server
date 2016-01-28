@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# heroku requires standard output and static assets
+gem 'rails_12factor', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -74,5 +76,5 @@ end
 
 group :test do
   gem 'shoulda-matchers'
-  gem 'rspec-rails', '~> 2.14'
+  gem 'rspec-rails', '~> 3.1'
 end

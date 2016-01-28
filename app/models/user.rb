@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :image_assets, dependent: :destroy
-  has_many :locket, dependent: :destroy
+  has_many :lockets, dependent: :destroy
 
   validates :auth_token, uniqueness: true
 
