@@ -1,9 +1,17 @@
-<h1>Welcome to Locket</h1>
 
-<p>
-  <%= link_to 'Log in', new_user_session_path %>
-</p>
-
-<p>
-  <%= link_to 'Sign up', new_user_registration_path %>
-</p>
+<div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
+  <div id="pageintro" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <article class="introtxt">
+      <h2 class="heading">Welcome to mobilelocket.com!</h2>
+      <p>Please log in to create lockets.</p>
+      <footer>
+        <ul class="nospace inline pushright">
+          <li><%= link_to 'sign in', new_user_session_path, class: "btn" %></li>
+          <li><%= link_to 'register', new_user_registration_path, class: "btn inverse" %></li>
+        </ul>
+      </footer>
+    </article>
+    <!-- ################################################################################################ -->
+  </div>
+</div>

@@ -5,15 +5,25 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
-<body>
+
+<body id="top">
+<%= render 'layouts/topbar' %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/mainav' %>
 
 <center>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+<div style="width:80%">
+<%= yield %>
+</div>
 </center>
 
-<%= yield %>
+<%= render 'layouts/footer' %>
 
 </body>
+<center>
+  <p><%= notice %></p>
+  <p><%= alert %></p>
+</center>
 </html>

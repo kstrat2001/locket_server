@@ -15,30 +15,31 @@
   <% end %>
 
 <p>
-  <%= f.label :title %><br>
+  <%= f.label :title %>
   <%= f.text_field :title %>
 </p>
 
 <p>
-  <%= f.label :open_image_id%><br>
+  <%= f.label :open_image_id %>
   <%= collection_select :locket, :open_image_id, ImageAsset.order(:title), :id, :title %>
 </p>
 
 <p>
-  <%= f.label :closed_image_id%><br>
+  <%= f.label :closed_image_id %>
   <%= collection_select :locket, :closed_image_id, ImageAsset.order(:title), :id, :title %>
 </p>
 
 <p>
-  <%= f.label :chain_image_id%><br>
+  <%= f.label :chain_image_id %>
   <%= collection_select :locket, :chain_image_id, ImageAsset.order(:title), :id, :title %>
 </p>
 
 <p>
-  <%= f.label :mask_image_id%><br>
+  <%= f.label :mask_image_id %>
   <%= collection_select :locket, :mask_image_id, ImageAsset.order(:title), :id, :title %>
 </p>
 
-<%= f.submit %>
+<br/>
+<%= f.submit class: 'btn'  %>
 
 <% end %>
