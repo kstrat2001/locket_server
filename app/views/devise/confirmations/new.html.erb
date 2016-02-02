@@ -8,9 +8,13 @@
     <%= f.input :email, required: true, autofocus: true %>
   </div>
 
+  <br>
+
   <div class="form-actions">
     <%= f.button :submit, "Resend confirmation instructions" %>
   </div>
 <% end %>
+
+<br>
 
 <%= render "devise/shared/links" %>
