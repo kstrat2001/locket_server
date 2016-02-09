@@ -1,0 +1,24 @@
+<h2>Image Assets</h2>
+<table>
+  <col width=64>
+  <col width=100>
+  <col width=100>
+  <col width=100>
+  <tr>
+    <th align="left">Title</th>
+    <th align="left">Thumb</th>
+    <th align="left">Update</th>
+    <th align="left">Delete</th>
+  </tr>
+<% current_user.image_assets.each do |asset| %>
+  <tr>
+    <td><%= link_to asset.title, site_user_image_asset_path(current_user, asset.id) %></td>
+    <td><%= image_tag asset.image.url(:thumb) %></td>
+    <td><%= link_to 'edit', edit_site_user_image_asset_path(current_user, asset.id) %></td>
+    <td><%= link_to 'delete', site_user_image_asset_path(current_user, asset), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br/>
+<%= link_to 'Create New Image Asset', new_site_user_image_asset_path(current_user), class: 'btn' %>

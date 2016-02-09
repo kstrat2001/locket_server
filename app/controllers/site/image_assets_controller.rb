@@ -3,6 +3,9 @@ class Site::ImageAssetsController < ApplicationController
     @asset = ImageAsset.find(params[:id])
   end
 
+  def index
+  end
+
   def new
     @user = current_user
     @image_asset = ImageAsset.new

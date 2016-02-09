@@ -5,12 +5,12 @@ RSpec.describe Site::LocketsController, type: :controller do
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create :user
-      @locket = FactoryGirl.create :locket, user: @user
+      @image = FactoryGirl.create :image_asset, user: @user
+      @locket = FactoryGirl.create :locket, user: @user, open_image_id: @image.id, closed_image_id: @image.id, chain_image_id: @image.id, mask_image_id: @image.id
       @user.confirm
       sign_in(@user)
 
       view_response_format
-
       get :show, { user_id: @user.id, id: @locket.id }
     end
 

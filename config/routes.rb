@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   namespace :site do
     resources :users, :only => [ :show ] do
-      resources :image_assets, :only => [ :show, :create, :new, :edit, :update, :destroy ]
-      resources :lockets, :only => [ :show, :create, :new, :edit, :update, :destroy ]
+      resources :image_assets, :only => [ :index, :show, :create, :new, :edit, :update, :destroy ]
+      resources :lockets, :only => [ :index, :show, :create, :new, :edit, :update, :destroy ]
     end
   end
 
@@ -23,12 +23,13 @@ Rails.application.routes.draw do
     scope module: :v1,
                   constraints: ApiConstraints.new(version: 1, default: true) do
 
-        resources :users, :only => [:show, :create, :update, :destroy] do
+      resources :users, :only => [:show, :create, :update, :destroy] do
         resources :image_assets, :only => [:create, :update, :destroy]
       end
 
       resources :sessions, :only => [:create, :destroy]
       resources :image_assets, :only => [:show, :index]
+      resources :lockets, :only => [:show, :index]
     end
   end
   

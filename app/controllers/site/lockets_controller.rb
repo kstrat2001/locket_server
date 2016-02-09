@@ -3,6 +3,9 @@ class Site::LocketsController < ApplicationController
     @locket = Locket.find(params[:id])
   end
 
+  def index
+  end
+
   def new
     @user = current_user
     @locket = Locket.new

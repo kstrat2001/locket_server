@@ -7,7 +7,7 @@ describe Api::V1::ImageAssetsController do
       get :show, id: @image_asset.id
     end
 
-    it "returns the information about a reporter on a hash" do
+    it "Returns the image asset info in json format" do
       image_asset_response = json_response[:image_asset]
       expect(image_asset_response[:title]).to eql @image_asset.title
     end

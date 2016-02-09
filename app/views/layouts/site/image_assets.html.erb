@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/head' %>
+
+<body id="top">
+
+<%= render 'layouts/topbar' %>
+
+<% if notice.to_s != "" || alert.to_s != "" %>
+  <center>
+    <p><%= notice %></p>
+    <p><%= alert %></p>
+  </center>
+<% end %>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <%= yield %>
+  </main>
+</div>
+
+<%= render 'layouts/footer' %>
+
+</body>
+</html>

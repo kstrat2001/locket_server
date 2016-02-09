@@ -14,12 +14,8 @@
     <div class="fl_right">
       <ul class="faico clear">
         <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a class="faicon-pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
         <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a class="faicon-dribble" href="#"><i class="fa fa-dribbble"></i></a></li>
-        <li><a class="faicon-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
         <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-        <li><a class="faicon-rss" href="#"><i class="fa fa-rss"></i></a></li>
       </ul>
     </div>
   </div>
@@ -27,36 +23,41 @@
 
 <!-- ################################################################################################ -->
 
-<div class="wrapper row1">
-  <header id="header" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <div id="logo" class="fl_left">
-      <h1><%= link_to 'Locket - A free mobile photo saver', root_path %> </h1>
-    </div>
-    <div id="quickinfo" class="fl_right">
-      <ul class="nospace inline">
-        <li><%= link_to image_tag( "apple/app_store_badge.svg" ), "https://itunes.apple.com/us/app/locket/id306891305?mt=8", target: "_blank" %></li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-  </header>
-</div>
+<% if !is_site? %>
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><%= link_to 'Locket - A free mobile photo saver', root_path %> </h1>
+      </div>
+      <div id="quickinfo" class="fl_right">
+        <ul class="nospace inline">
+          <li><%= link_to image_tag( "apple/app_store_badge.svg" ), "https://itunes.apple.com/us/app/locket/id306891305?mt=8", target: "_blank" %></li>
+        </ul>
+      </div>
+      <!-- ################################################################################################ -->
+    </header>
+  </div>
+<% end %>
 
 <!-- ################################################################################################ -->
 
 <div class="wrapper row2">
   <nav id="mainav" class="hoc clear"> 
     <ul class="clear">
-      <li class="active"><%= link_to 'Home', root_path %></a></li>
-      <li><a class="drop" href="#">Pages</a>
+      <% if controller_name == "welcome" %><li class="active"><% else %><li><% end %>
+        <%= link_to 'Home', root_path %>
+      </li>
+      <% if current_user %>
+      <% if is_site? %><li class="active"><% else %><li><% end %>
+        <%= link_to 'My Assets', site_user_path(current_user), class: "drop" %>
         <ul>
-          <li><a href="pages/gallery.html">Gallery</a></li>
-          <li><a href="pages/full-width.html">Full Width</a></li>
-          <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-          <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-          <li><a href="pages/basic-grid.html">Basic Grid</a></li>
+          <li><%= link_to 'Image Assets', site_user_image_assets_path(current_user) %></li>
+          <li><%= link_to 'Lockets', site_user_lockets_path(current_user) %></li>
         </ul>
       </li>
+      <% end %>
+      <% if false %>
       <li><a class="drop" href="#">Dropdown</a>
         <ul>
           <li><a href="#">Level 2</a></li>
@@ -70,6 +71,7 @@
           <li><a href="#">Level 2</a></li>
         </ul>
       </li>
+      <% end %>
     </ul>
   </nav>
 </div>
