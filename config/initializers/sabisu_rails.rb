@@ -24,7 +24,7 @@ if Rails.env.development?
     # config.layout = "sabisu"
 
     # Resources on the api
-    config.resources = [ :users, :image_assets ]
+    config.resources = [ :users, :image_assets, :lockets ]
 
     # Application name
     # mattr_accessor :app_name

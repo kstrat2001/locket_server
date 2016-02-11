@@ -1,7 +1,8 @@
 class LocketSerializer < ActiveModel::Serializer
-  attributes :id, :title, :open_img, :closed_image, :chain_image, :mask_image
+  attributes :id, :title
 
-  def open_img
-    object.open_image.image.url
-  end
+  has_one :open_image
+  has_one :closed_image
+  has_one :chain_image
+  has_one :mask_image
 end
