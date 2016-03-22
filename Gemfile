@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 # heroku requires standard output and static assets
 gem 'rails_12factor', group: :production
 
-#gem 'unicorn'
-#gem 'passenger'
 gem 'puma'
 gem 'foreman'
 
