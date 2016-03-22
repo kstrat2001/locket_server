@@ -1,13 +1,22 @@
-<h1><%= "Image Asset: #{@asset.title}" %> </h1>
 
-<p>
-  Anchor X: <%= @asset.anchor_x %>
-</p>
 
-<p>
-  Anchor Y: <%= @asset.anchor_y %>
-</p>
+<div id="fields">
+    <h1><%= "Image Asset: #{@asset.title}" %> </h1>
+    <p>
+      Anchor X: <%= @asset.anchor_x %>
+    </p>
+    <p>
+      Anchor Y: <%= @asset.anchor_y %>
+    </p>
+    <p>
+        Width: <%= @asset.width %>
+    </p>
+    <p>
+        Height: <%= @asset.height %>
+    </p>
 
-<p>
-  <%= image_tag @asset.image.url %>
-</p>
+    <br>
+    <%= link_to 'edit', edit_site_user_image_asset_path(current_user, @asset.id), class: 'btn' %>
+</div>
+
+<%= image_tag @asset.image.url, style: "float: right;max-height: 400px;" %>

@@ -1,16 +1,21 @@
-<h1><%= "Locket: #{@locket.title}" %> </h1>
+<h1><%= "Locket Skin: #{@locket.title}" %> </h1>
 
-<h2>Open Image</h2>
-<%= image_tag @locket.open_image.image.url(:thumb) %>
-
-<h2>Closed Image</h2>
-<%= image_tag @locket.closed_image.image.url(:thumb) %>
-
-<h2>Mask Image</h2>
-<%= image_tag @locket.mask_image.image.url(:thumb) %>
-
-<h2>Chain Image</h2>
-<%= image_tag @locket.chain_image.image.url(:thumb) %>
+<table>
+  <tr>
+    <th align="left"><%= link_to 'Closed Image', site_user_image_asset_path(current_user, @locket.closed_image.id) %></th>
+    <th align="left"><%= link_to 'Open Image', site_user_image_asset_path(current_user, @locket.open_image.id) %></th>
+    <th align="left"><%= link_to 'Chain Image', site_user_image_asset_path(current_user, @locket.chain_image.id) %></th>
+    <th align="left"><%= link_to 'Mask Image', site_user_image_asset_path(current_user, @locket.mask_image.id) %></th>
+  </tr>
+<% current_user.lockets.each do |locket| %>
+  <tr>
+    <td><%= image_tag @locket.closed_image.image.url(:thumb) %></td>
+    <td><%= image_tag @locket.open_image.image.url(:thumb) %></td>
+    <td><%= image_tag @locket.chain_image.image.url(:thumb) %></td>
+    <td><%= image_tag @locket.mask_image.image.url(:thumb) %></td>
+  </tr>
+<% end %>
+</table>
 
 <br>
-<%= link_to "Edit #{@locket.title}", edit_site_user_locket_path(current_user, @locket.id) %>
+<%= link_to "Edit #{@locket.title}", edit_site_user_locket_path(current_user, @locket.id), class: 'btn' %>

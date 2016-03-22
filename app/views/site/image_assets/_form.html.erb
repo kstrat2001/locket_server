@@ -15,25 +15,26 @@
   <% end %>
 
 <p>
-  <%= f.label :title %><br>
+  <%= f.label :title %>
   <%= f.text_field :title %>
 </p>
 
 <p>
-  <%= f.label :anchor_x %><br>
+  <%= f.label :anchor_x %>
   <%= f.number_field :anchor_x %>
 </p>
 
 <p>
-  <%= f.label :anchor_y %><br>
+  <%= f.label :anchor_y %>
   <%= f.number_field :anchor_y %>
 </p>
 
 <p>
-  <%= f.label :image %><br>
+  <%= f.label :image %>
   <%= f.file_field :image %>
 </p>
 
-<%= f.submit %>
+<br>
+<%= f.submit 'Update Asset', class: 'btn' %>
 
 <% end %>

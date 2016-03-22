@@ -1,7 +1,6 @@
 <h1>Edit Image Asset</h1>
-<%= render 'form' %>
+<div id="fields">
+    <%= render 'form' %>
+</div>
 
-<br>
-
-<h2>Current Image</h2>
-<%= image_tag @image_asset.image.url %>
+<%= image_tag @image_asset.image.url, style: "float: right;max-height: 400px;" %>
