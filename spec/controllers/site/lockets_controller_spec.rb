@@ -15,7 +15,7 @@ RSpec.describe Site::LocketsController, type: :controller do
     end
 
     it "renders the data for a locket record" do
-      response.should render_template('lockets/show')
+      expect render_template('lockets/show')
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe Site::LocketsController, type: :controller do
     end
 
     it "renders the form for the new locket" do
-      response.should render_template('lockets/new')
+      expect render_template('lockets/new')
     end
   end
 
@@ -48,8 +48,106 @@ RSpec.describe Site::LocketsController, type: :controller do
     end
 
     it "renders the edit form for a locket record" do
-      response.should render_template('lockets/edit')
+      expect render_template('lockets/edit')
     end
+  end
+
+  describe "Workflow new" do
+      before(:each) do
+          @user = FactoryGirl.create :user
+          @locket = FactoryGirl.create :locket, user: @user
+      end
+
+      it "has state new" do
+          expect(@locket.new?).to eql true
+          expect(@locket.waiting_for_review?).to eql false
+          expect(@locket.in_review?).to eql false
+          expect(@locket.accepted?).to eql false
+          expect(@locket.rejected?).to eql false
+      end
+  end
+
+  describe "Locket Workflow" do
+      before(:each) do
+          @user = FactoryGirl.create :user
+          @locket = FactoryGirl.create :locket, user: @user
+          @user.confirm
+          sign_in(@user)
+
+      end
+
+      context "when created" do
+          before(:each) do
+              @locket = Locket.find(@locket.id)
+          end
+
+          it "has state new" do
+            expect(@locket.new?).to eql true
+          end
+      end
+
+      context "when submitted" do
+          before(:each) do
+            patch :submit, { user_id: @user.id, id: @locket.id }
+            @locket = Locket.find(@locket.id)
+          end
+
+          it "has state waiting_for_review" do
+              expect(@locket.waiting_for_review?).to eql true
+          end
+      end
+
+      context "when submitted and reviewed" do
+          before(:each) do
+            patch :submit, { user_id: @user.id, id: @locket.id }
+            patch :review, { user_id: @user.id, id: @locket.id }
+            @locket = Locket.find(@locket.id)
+          end
+
+          it "has state in_review" do
+              expect(@locket.in_review?).to eql true
+          end
+      end
+
+      context "when submitted and reviewed and accepted" do
+          before(:each) do
+            patch :submit, { user_id: @user.id, id: @locket.id }
+            patch :review, { user_id: @user.id, id: @locket.id }
+            patch :accept, { user_id: @user.id, id: @locket.id }
+            @locket = Locket.find(@locket.id)
+          end
+
+          it "has state in_review" do
+              expect(@locket.accepted?).to eql true
+          end
+      end
+
+      context "when submitted and reviewed and rejected" do
+          before(:each) do
+            patch :submit, { user_id: @user.id, id: @locket.id }
+            patch :review, { user_id: @user.id, id: @locket.id }
+            patch :reject, { user_id: @user.id, id: @locket.id }
+            @locket = Locket.find(@locket.id)
+          end
+
+          it "has state rejected" do
+              expect(@locket.rejected?).to eql true
+          end
+      end
+
+      context "when submitted and reviewed and rejected and resubmitted" do
+          before(:each) do
+            patch :submit, { user_id: @user.id, id: @locket.id }
+            patch :review, { user_id: @user.id, id: @locket.id }
+            patch :reject, { user_id: @user.id, id: @locket.id }
+            patch :resubmit, { user_id: @user.id, id: @locket.id }
+            @locket = Locket.find(@locket.id)
+          end
+
+          it "has state waiting_for_review" do
+              expect(@locket.waiting_for_review?).to eql true
+          end
+      end
   end
 
   describe "POST #create" do
@@ -59,7 +157,6 @@ RSpec.describe Site::LocketsController, type: :controller do
         @user.confirm
         sign_in(@user)
         @locket_attributes = FactoryGirl.attributes_for :locket
-
         post :create, { user_id: @user.id, locket: @locket_attributes }
       end
 
@@ -82,7 +179,7 @@ RSpec.describe Site::LocketsController, type: :controller do
       it { should respond_with 200 }
 
       it "renders the template for a new locket with errors" do
-        response.should render_template('lockets/new')
+        expect render_template('lockets/new')
       end
     end
   end

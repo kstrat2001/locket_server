@@ -14,7 +14,15 @@ Rails.application.routes.draw do
   namespace :site do
     resources :users, :only => [ :show ] do
       resources :image_assets, :only => [ :index, :show, :create, :new, :edit, :update, :destroy ]
-      resources :lockets, :only => [ :index, :show, :create, :new, :edit, :update, :destroy ]
+      resources :lockets, :only => [ :index, :show, :create, :new, :edit, :update, :destroy ] do
+        member do
+            patch 'submit'
+            patch 'review'
+            patch 'accept'
+            patch 'reject'
+            patch 'resubmit'
+        end
+      end
     end
   end
 
@@ -32,6 +40,6 @@ Rails.application.routes.draw do
       resources :lockets, :only => [:show, :index]
     end
   end
-  
+
 
 end

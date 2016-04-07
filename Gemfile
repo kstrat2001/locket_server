@@ -53,6 +53,8 @@ gem 'figaro'
 # simple forms (also needed for sabisu)
 gem 'simple_form', '~> 3.1.0'
 
+gem 'workflow'
+
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

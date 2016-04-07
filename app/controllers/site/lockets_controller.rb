@@ -35,7 +35,7 @@ class Site::LocketsController < ApplicationController
     if @locket.update(locket_params)
       redirect_to site_user_locket_path(current_user, @locket)
     else
-      render site_user_locket_path(current_user, @locket) 
+      render site_user_locket_path(current_user, @locket)
     end
   end
 
@@ -47,5 +47,35 @@ class Site::LocketsController < ApplicationController
 
   def locket_params
     params.require(:locket).permit(:title, :open_image_id, :closed_image_id, :mask_image_id, :chain_image_id, :image)
+  end
+
+  def submit
+      @locket = Locket.find(params[:id])
+      @locket.submit!
+      redirect_to site_user_locket_path(current_user, @locket)
+  end
+
+  def review
+      @locket = Locket.find(params[:id])
+      @locket.review!
+      redirect_to site_user_locket_path(current_user, @locket)
+  end
+
+  def accept
+      @locket = Locket.find(params[:id])
+      @locket.accept!
+      redirect_to site_user_locket_path(current_user, @locket)
+  end
+
+  def reject
+      @locket = Locket.find(params[:id])
+      @locket.reject!
+      redirect_to site_user_locket_path(current_user, @locket)
+  end
+
+  def resubmit
+      @locket = Locket.find(params[:id])
+      @locket.resubmit!
+      redirect_to site_user_locket_path(current_user, @locket)
   end
 end
