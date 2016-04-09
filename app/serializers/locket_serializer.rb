@@ -1,5 +1,5 @@
 class LocketSerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id, :title, :updated_at
 
   has_one :open_image
   has_one :closed_image

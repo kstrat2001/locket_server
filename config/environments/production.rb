@@ -4,6 +4,9 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
+  # Time zone utc
+  config.time_zone = 'UTC'
+
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -94,7 +97,7 @@ Rails.application.configure do
     user_name: ENV['EMAIL_USERNAME'],
     password: ENV['EMAIL_PASSWORD']
   }
-  
+
   Paperclip.options[:command_path] = "/usr/local/bin"
 
   config.paperclip_defaults = {

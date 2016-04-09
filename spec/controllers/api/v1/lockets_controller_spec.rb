@@ -5,18 +5,24 @@ RSpec.describe Api::V1::LocketsController, type: :controller do
     before(:each) do
       @user = FactoryGirl.create :user
       @image = FactoryGirl.create :image_asset, user: @user
-      @locket = FactoryGirl.create :locket, user: @user, open_image_id: @image.id, closed_image_id: @image.id, chain_image_id: @image.id, mask_image_id: @image.id
+      @locket = FactoryGirl.create :locket, user: @user, updated_at: @now,
+                                    open_image_id: @image.id, closed_image_id: @image.id,
+                                    chain_image_id: @image.id, mask_image_id: @image.id
+
+      @updated = @locket.updated_at
 
       get :show, id: @locket.id
     end
 
     it "Returns the locket info in json format" do
       locket_response = json_response[:locket]
+      expect(locket_response[:id]).to eql @locket.id
       expect(locket_response[:title]).to eql @locket.title
       expect(locket_response[:open_image][:id]).to eql @image.id
       expect(locket_response[:closed_image][:id]).to eql @image.id
       expect(locket_response[:chain_image][:id]).to eql @image.id
       expect(locket_response[:mask_image][:id]).to eql @image.id
+      expect(locket_response[:updated_at]).to eql @updated.utc.strftime('%Y-%m-%dT%H:%M:%S%z')
     end
 
     it { should respond_with 200 }
@@ -24,7 +30,7 @@ RSpec.describe Api::V1::LocketsController, type: :controller do
 
   describe "GET #index" do
     before(:each) do
-      4.times { 
+      4.times {
         user = FactoryGirl.create :user
         image = FactoryGirl.create :image_asset, user: user
         locket = FactoryGirl.create :locket, user: user, open_image_id: image.id, closed_image_id: image.id, chain_image_id: image.id, mask_image_id: image.id

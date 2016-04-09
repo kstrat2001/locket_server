@@ -9,6 +9,9 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  # Time zone utc
+  config.time_zone = 'UTC'
+
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
@@ -56,7 +59,7 @@ Rails.application.configure do
     user_name: ENV['EMAIL_USERNAME'],
     password: ENV['EMAIL_PASSWORD']
   }
-  
+
   Paperclip.options[:command_path] = "/usr/local/bin"
 
   config.paperclip_defaults = {
