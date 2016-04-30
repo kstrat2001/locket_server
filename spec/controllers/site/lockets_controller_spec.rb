@@ -148,6 +148,20 @@ RSpec.describe Site::LocketsController, type: :controller do
               expect(@locket.waiting_for_review?).to eql true
           end
       end
+
+      context "when accepted and renewed" do
+          before(:each) do
+            patch :submit, { user_id: @user.id, id: @locket.id }
+            patch :review, { user_id: @user.id, id: @locket.id }
+            patch :accept, { user_id: @user.id, id: @locket.id }
+            patch :renew,  { user_id: @user.id, id: @locket.id }
+            @locket = Locket.find(@locket.id)
+          end
+
+          it "has state new" do
+              expect(@locket.new?).to eql true
+          end
+      end
   end
 
   describe "POST #create" do

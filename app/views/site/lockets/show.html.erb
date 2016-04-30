@@ -15,5 +15,20 @@
   </tr>
 </table>
 
-<br>
-<%= link_to "Edit #{@locket.title}", edit_site_user_locket_path(current_user, @locket.id), class: 'btn' %>
+<% if @locket.can_edit? %>
+    <%= link_to "Edit this locket", edit_site_user_locket_path(current_user, @locket.id), class: 'btn' %>
+<% end %>
+
+<%= link_to 'Delete this locket', site_user_locket_path(current_user, @locket), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn inverse' %>
+    <br><br>
+<p>
+    <h2>Review State: <%= @locket.state_string %></h2>
+
+    <% if @locket.new? %>
+      <%= link_to "Submit for reivew", submit_site_user_locket_path(current_user, @locket.id), method: :patch, class: 'btn' %>
+    <% elsif @locket.rejected? %>
+      <%= link_to "Resubmit for reivew", resubmit_site_user_locket_path(current_user, @locket.id), method: :patch, class: 'btn' %>
+    <% elsif @locket.accepted? %>
+      <%= link_to "Renew", renew_site_user_locket_path(current_user, @locket.id), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn' %>
+    <% end %>
+</p>

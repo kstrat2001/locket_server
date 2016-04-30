@@ -78,4 +78,10 @@ class Site::LocketsController < ApplicationController
       @locket.resubmit!
       redirect_to site_user_locket_path(current_user, @locket)
   end
+
+  def renew
+      @locket = Locket.find(params[:id])
+      @locket.renew!
+      redirect_to site_user_locket_path(current_user, @locket)
+  end
 end

@@ -11,7 +11,9 @@ class Locket < ActiveRecord::Base
           event :accept, :transitions_to => :accepted
           event :reject, :transitions_to => :rejected
       end
-      state :accepted
+      state :accepted do
+          event :renew, :transitions_to => :new
+      end
       state :rejected do
           event :resubmit, :transitions_to => :waiting_for_review
       end
@@ -35,5 +37,29 @@ class Locket < ActiveRecord::Base
 
   def chain_image
     return ImageAsset.find(chain_image_id)
+  end
+
+  def state_string
+    if new?
+      return "New"
+    elsif waiting_for_review?
+      return "Waiting for review"
+    elsif in_review?
+      return "In review"
+    elsif accepted?
+      return "Accepted"
+    elsif rejected?
+      return "Rejected"
+    end
+  end
+
+  def can_edit?
+    if new?
+      return true
+    elsif rejected?
+      return true
+    end
+
+    return false
   end
 end

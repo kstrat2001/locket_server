@@ -1,0 +1,32 @@
+<h1><%= "Admin: #{current_user.email}" %></h1>
+
+<table>
+  <col width=100>
+  <col width=100>
+  <col width=100>
+  <col width=100>
+  <tr>
+    <th align="left">View</th>
+    <th align="left">Preview</th>
+    <th align="left">State</th>
+    <th align="left">Action</th>
+  </tr>
+<% Locket.all.each do |locket| %>
+  <tr>
+    <td><%= locket.title %></td>
+    <td><%= image_tag locket.closed_image.image.url(:thumb) %></td>
+    <td><%= locket.state_string %></td>
+    <% if locket.new? %>
+      <td>New (not in review)</td>
+    <% elsif locket.waiting_for_review? %>
+      <td><%= link_to 'Review', review_site_user_locket_path(current_user, locket), data: { confirm: 'Are you sure you want to start the review process?' }, method: :patch, class: 'btn' %></td>
+    <% elsif locket.in_review? %>
+      <td><%= link_to 'Accept', accept_site_user_locket_path(current_user, locket), data: { confirm: 'Are you sure you want to ACCEPT this locket?' }, method: :patch, class: 'btn' %>
+          <%= link_to 'Reject', reject_site_user_locket_path(current_user, locket), data: { confirm: 'Are you sure you want to REJECT this locket?' }, method: :patch, class: 'btn' %>
+      </td>
+    <% else %>
+      <td>No Action</td>
+    <% end %>
+  </tr>
+<% end %>
+</table>

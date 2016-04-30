@@ -6,7 +6,11 @@ class Api::V1::LocketsController < ApplicationController
   end
 
   def index
-    respond_with Locket.all
+    if params[:workflow_state]
+      respond_with Locket.where("workflow_state = ?", params[:workflow_state])
+    else
+      respond_with Locket.all
+    end
   end
 
 end

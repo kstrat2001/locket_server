@@ -21,4 +21,14 @@ describe Site::UsersController do
     end
   end
 
+  describe "GET admin" do
+    before(:each) do
+      get :admin, id: @user.id
+    end
+
+    it "renders the user admin page" do
+      response.should render_template('users/admin')
+    end
+  end
+
 end

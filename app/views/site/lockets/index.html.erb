@@ -1,24 +1,6 @@
 <h2>My Locket Skins</h2>
-<table>
-  <col width=100>
-  <col width=100>
-  <col width=100>
-  <col width=100>
-  <tr>
-    <th align="left">View</th>
-    <th align="left">Preview</th>
-    <th align="left">Update</th>
-    <th align="left">Delete</th>
-  </tr>
-<% current_user.lockets.each do |locket| %>
-  <tr>
-    <td><%= link_to locket.title, site_user_locket_path(current_user, locket.id) %></td>
-    <td><%= image_tag locket.closed_image.image.url(:thumb) %></td>
-    <td><%= link_to 'edit', edit_site_user_locket_path(current_user, locket.id), class: 'btn' %></td>
-    <td><%= link_to 'delete', site_user_locket_path(current_user, locket), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %></td>
-  </tr>
-<% end %>
-</table>
+
+<%= render 'table', :lockets => current_user.lockets %>
 
 <br>
 <%= link_to 'Create New', new_site_user_locket_path(current_user), class: 'btn' %>

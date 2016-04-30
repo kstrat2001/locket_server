@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   namespace :site do
     resources :users, :only => [ :show ] do
+      member do
+        get 'admin'
+      end
       resources :image_assets, :only => [ :index, :show, :create, :new, :edit, :update, :destroy ]
       resources :lockets, :only => [ :index, :show, :create, :new, :edit, :update, :destroy ] do
         member do
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
             patch 'accept'
             patch 'reject'
             patch 'resubmit'
+            patch 'renew'
         end
       end
     end
